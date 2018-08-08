@@ -1,6 +1,6 @@
 {
   "name": "ts-try",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "try catch wrapper for functional typescript programming",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
