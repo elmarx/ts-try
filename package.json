@@ -1,0 +1,21 @@
+{
+  "name": "ts-try",
+  "version": "0.0.0",
+  "description": "try catch wrapper for functional typescript programming",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": "git@github.com/zauberpony/ts-try.git",
+  "author": "Elmar Athmer <elmar@athmer.org>",
+  "license": "MIT",
+  "scripts": {
+    "prepublishOnly": "tsc -p tsconfig.dist.json",
+    "test": "mocha test/*.test.ts"
+  },
+  "devDependencies": {
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.5.7",
+    "mocha": "^5.2.0",
+    "ts-node": "^7.0.0",
+    "typescript": "^3.0.1"
+  }
+}
