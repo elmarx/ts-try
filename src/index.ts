@@ -5,22 +5,22 @@
  * as suggested by https://stackoverflow.com/questions/27746304/how-do-i-tell-if-an-object-is-a-promise
  * as is plausible considering https://promisesaplus.com/#point-53
  */
-function isPromise(obj: unknown): obj is Promise<any> {
+function isPromiseLike(obj: unknown): obj is PromiseLike<unknown> {
     return !!obj && (typeof obj === "object" || typeof obj === "function") && typeof (obj as any).then === "function";
 }
 
 /**
  * Union type to wrap the original type T and allow Errors additionally
  */
-export type Try<T> = T | Error;
+export type Try<T, E extends Error = Error> = T | E;
 
 /**
  * simple function to turn a promise of type T to type T | Error
  *
  * i.e.: catch the error and return it as the value
  */
-function tryify<T>(p: Promise<T>): Try<T> {
-    return (p as any).then((x: T) => x, (err: Error) => err);
+function tryify<T, E extends Error = Error>(p: PromiseLike<T>): PromiseLike<Try<T, E>> {
+    return p.then((x: T) => x, (err: E) => err);
 }
 
 /**
@@ -28,31 +28,28 @@ function tryify<T>(p: Promise<T>): Try<T> {
  *
  * it imitates the concept (though it's not a monad) of scala.util.Try — but try is a reserved keyword, so it's called tryF
  */
-export function tryF<T>(asyncBlock: () => Promise<T>): Promise<Try<T>>;
-export function tryF<T>(block: () => T): Try<T>;
-// tslint:disable-next-line:unified-signatures I want the name (in completion) to be promise, so I NOT unifying here is desired
-export function tryF<T>(promise: PromiseLike<T>): Promise<Try<T>>;
-export function tryF<T>(input: PromiseLike<T> | (() => T | Promise<T>)): Try<T> | Promise<Try<T>> {
-    // if the input is a simple promise, a simple tryify is enougf
-    if (isPromise(input)) {
+export function tryF<T, E extends Error = Error>(asyncBlock: () => PromiseLike<T>): PromiseLike<Try<T, E>>;
+export function tryF<T, E extends Error = Error>(block: () => T): Try<T, E>;
+export function tryF<T, E extends Error = Error>(promise: PromiseLike<T>): PromiseLike<Try<T, E>>;
+export function tryF<T, E extends Error = Error>(input: PromiseLike<T> | (() => T | PromiseLike<T>)): Try<T, E> | PromiseLike<Try<T, E>> {
+    // if the input is a simple promise, a simple try-ify is enough
+    if (isPromiseLike(input)) {
         return tryify(input);
     }
 
     // ok, the input is a (sync or async) function, we need to execute it
-    const block: () => T | Promise<T> = input as () => T | Promise<T>;
-
     try {
-        const v = block();
+        const v = input();
 
-        // if block is an async function, tryify the returned promise
-        if (isPromise(v)) {
-            return tryify(v);
+        // if block is an async function, try-ify the returned promise
+        if (isPromiseLike(v)) {
+            return tryify<T, E>(v);
         }
 
         // if block is sync, the result is in v, so just return
         return v;
     } catch (err) {
-        // execution of block throwed (and it's obviously sync), so return the error
+        // execution of block threw (and it's obviously sync), so return the error
         return err;
     }
 }

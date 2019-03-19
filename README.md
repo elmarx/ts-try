@@ -35,9 +35,10 @@ to check this, so there's no way you can miss that.
 
 ## API
 
-### `type Try<T> = T | Error`
+### `type Try<T, E extends Error = Error> = T | E`
 
-A wrapper for types. If a function might fail, the return type may be `Try<T>`.
+A wrapper for types. If a function might fail, the return type may be `Try<T, E>`. `E` is optional, if you want to further
+specify the type of the error.
 
 Instead of 
 
@@ -51,6 +52,13 @@ one can write
 function getDataFromApi(id: number): Try<Response> { } 
 ```
 
+or even
+
+```typescript
+function getDataFromApi(id: number): Try<Response, MyCustomError> { } 
+```
+
+Please be aware that no runtime error-type-checking happens.
 
 ### `function isError(o: unknown): o is Error`
 
