@@ -6,9 +6,10 @@
   version "5.2.5"
   resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-5.2.5.tgz#8a4accfc403c124a0bafe8a9fc61a05ec1032073"
 
-"@types/node@^10.5.7":
-  version "10.5.7"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.5.7.tgz#960d9feb3ade2233bcc9843c918d740b4f78a7cf"
+"@types/node@^12.11.3":
+  version "12.11.4"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.11.4.tgz#0677fde59021b19502cf830a91159c2e15b70e04"
+  integrity sha512-cleUgvdZp8NwbeI2AJNMv5VIsdZbO5tDxNgpNb9SOG3IdBFZliUIkMXDCPs05LNzxlrAA3eVfGoV8JFOv/BIig==
 
 ansi-colors@3.2.3:
   version "3.2.3"
