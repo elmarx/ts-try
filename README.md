@@ -1,7 +1,6 @@
 # ts-try — wrapper for try/catch for functional programming in typescript
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/zauberpony/ts-try.svg)](https://greenkeeper.io/)
-[![Build Status](https://travis-ci.org/zauberpony/ts-try.svg?branch=master)](https://travis-ci.org/zauberpony/ts-try)
+![Build Status](https://github.com/elmarx/ts-try/workflows/CI/badge.svg)
 [![npm version](https://badge.fury.io/js/ts-try.svg)](https://badge.fury.io/js/ts-try)
 
 
