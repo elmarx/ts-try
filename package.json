@@ -4,7 +4,7 @@
   "description": "try catch wrapper for functional typescript programming",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "repository": "git@github.com/zauberpony/ts-try.git",
+  "repository": "git@github.com/elmarx/ts-try.git",
   "author": "Elmar Athmer <elmar@athmer.org>",
   "license": "MIT",
   "scripts": {
