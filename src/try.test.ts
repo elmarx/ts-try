@@ -1,5 +1,5 @@
 import assert from "assert";
-import {isError, tryF} from "../src";
+import {isError, tryF} from "./index";
 
 describe("tryF", () => {
 

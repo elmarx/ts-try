@@ -1,1 +1,8 @@
+.envrc
+.idea
+
+*.test.js
+*.test.d.ts
+*.test.d.ts.map
+
 src
